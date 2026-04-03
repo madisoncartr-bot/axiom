@@ -1,0 +1,181 @@
+---
+import Base from '../layouts/Base.astro';
+const lastUpdated = '2026-04-03';
+---
+
+<Base title="Now" description="What I'm focused on right now.">
+  <div class="container-sm">
+
+    <header class="page-header">
+      <p class="label"><span class="slash">// </span>MOD-04 — updated {lastUpdated}</p>
+      <h1>Now<span style="color:var(--accent)">.</span></h1>
+      <p class="page-desc">
+        A <a href="https://nownownow.com" target="_blank">now page</a> — what I'm actually focused on,
+        not what looks good. Updated at least once a month.
+      </p>
+    </header>
+
+    <div class="now-sections">
+
+      <section class="now-section">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <h2>What I'm building</h2>
+        </div>
+        <div class="now-content">
+          <p>This site, AXIOM.OS. I started it three weeks ago and it has already changed how I think about learning in public. The act of publishing forces clarity.</p>
+          <p>Also tinkering with a CLI tool that auto-generates my weekly log entry by summarising commits, notes, and highlights from the week. Works about 70% of the time.</p>
+        </div>
+      </section>
+
+      <section class="now-section">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <h2>What I'm learning</h2>
+        </div>
+        <div class="now-content">
+          <div class="learning-list">
+            <div class="learning-item">
+              <span class="li-icon">📚</span>
+              <div>
+                <p class="li-title">Distributed Systems — Kleppmann's DDIA</p>
+                <p class="li-note">Chapter 8: Trouble with distributed systems. The CAP theorem finally makes intuitive sense.</p>
+              </div>
+            </div>
+            <div class="learning-item">
+              <span class="li-icon">🔧</span>
+              <div>
+                <p class="li-title">TypeScript — deep type system</p>
+                <p class="li-note">Conditional types, infer keyword, template literal types. Genuinely powerful stuff.</p>
+              </div>
+            </div>
+            <div class="learning-item">
+              <span class="li-icon">✍️</span>
+              <div>
+                <p class="li-title">Writing — daily practice</p>
+                <p class="li-note">500 words every morning before opening email. Compounding faster than I expected.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="now-section">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <h2>What I'm thinking about</h2>
+        </div>
+        <div class="now-content">
+          <p>The tension between depth and breadth. Most advice says pick one — I think the best thinkers cycle between them deliberately.</p>
+          <p>How to make a knowledge base that actually ages well. Most notes feel useless six months after writing them. I think the fix is connecting ideas, not filing them.</p>
+        </div>
+      </section>
+
+      <section class="now-section">
+        <div class="section-header">
+          <span class="section-num">04</span>
+          <h2>Not doing</h2>
+        </div>
+        <div class="now-content">
+          <p>Social media (mostly). Job hunting. Optimising this site before it has content. Starting new projects before finishing current ones.</p>
+        </div>
+      </section>
+
+      <section class="now-section">
+        <div class="section-header">
+          <span class="section-num">05</span>
+          <h2>Where I am</h2>
+        </div>
+        <div class="now-content">
+          <p>Parksville, British Columbia. Working remotely. If you're nearby and want to grab coffee and talk about distributed systems or personal knowledge management, reach out.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="now-footer">
+      <p class="label"><span class="slash">// </span>Last updated: {lastUpdated}</p>
+      <p class="now-footer-note">
+        This is a <a href="https://nownownow.com/about" target="_blank">now page</a>.
+        Inspired by Derek Sivers.
+      </p>
+    </div>
+
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+  .page-header .label { margin-bottom: 16px; }
+  .page-desc {
+    font-size: 17px;
+    color: var(--muted);
+    margin-top: 20px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .page-desc a { color: var(--accent2); }
+
+  .now-sections { display: flex; flex-direction: column; gap: 0; }
+
+  .now-section {
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+  }
+
+  .section-header { padding-top: 4px; }
+  .section-num {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .now-section h2 {
+    font-size: 20px;
+    font-family: var(--mono);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .now-content p {
+    font-size: 16px;
+    color: #c0c8d0;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .now-content p:last-child { margin-bottom: 0; }
+
+  .learning-list { display: flex; flex-direction: column; gap: 24px; }
+  .learning-item { display: flex; gap: 16px; align-items: flex-start; }
+  .li-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .li-title {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .li-note { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  .now-footer {
+    padding: 48px 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .now-footer-note { font-size: 13px; color: var(--muted); }
+  .now-footer-note a { color: var(--accent2); }
+
+  @media (max-width: 680px) {
+    .now-section { grid-template-columns: 1fr; gap: 16px; }
+  }
+</style>

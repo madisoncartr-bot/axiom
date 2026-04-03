@@ -1,0 +1,235 @@
+---
+import Base from '../layouts/Base.astro';
+
+const notes = [
+  {
+    id: 'MN-001',
+    title: 'The Map Is Not the Territory',
+    tags: ['mental-models', 'epistemology'],
+    excerpt: 'Our representations of reality are always simplified. Knowing this changes how you reason about everything.',
+    updated: '2026-03-28',
+    connections: 7
+  },
+  {
+    id: 'MN-002',
+    title: 'Systems Thinking: Feedback Loops',
+    tags: ['systems', 'complexity'],
+    excerpt: 'Reinforcing loops amplify change. Balancing loops resist it. Every system is built from these two primitives.',
+    updated: '2026-03-22',
+    connections: 12
+  },
+  {
+    id: 'MN-003',
+    title: 'First Principles vs Analogy',
+    tags: ['mental-models', 'thinking'],
+    excerpt: 'Reasoning by analogy is fast but fragile. First principles thinking is slow but durable. Know when to use each.',
+    updated: '2026-03-15',
+    connections: 5
+  },
+  {
+    id: 'MN-004',
+    title: 'Inversion: Solve Backwards',
+    tags: ['mental-models', 'problem-solving'],
+    excerpt: 'Instead of asking how to succeed, ask how you would fail — then avoid those things. Charlie Munger's core tool.',
+    updated: '2026-03-10',
+    connections: 9
+  },
+  {
+    id: 'MN-005',
+    title: 'The Compounding Effect on Skills',
+    tags: ['learning', 'growth'],
+    excerpt: 'Skills compound like interest. A 1% improvement daily leads to 37x growth in a year. The key is consistency.',
+    updated: '2026-03-05',
+    connections: 4
+  },
+  {
+    id: 'MN-006',
+    title: 'Distributed Systems: CAP Theorem',
+    tags: ['tech', 'computer-science'],
+    excerpt: 'You can only guarantee two of three: Consistency, Availability, Partition tolerance. Every design is a tradeoff.',
+    updated: '2026-02-28',
+    connections: 3
+  },
+];
+
+const allTags = [...new Set(notes.flatMap(n => n.tags))];
+---
+
+<Base title="Second Brain" description="My personal knowledge base — mental models, notes, and connected ideas.">
+  <div class="container">
+
+    <header class="page-header">
+      <p class="label"><span class="slash">// </span>MOD-01</p>
+      <h1>Second <span style="color:var(--accent)">Brain</span></h1>
+      <p class="page-desc">
+        A living knowledge graph. These are the ideas I return to, the models I think with,
+        and the concepts worth encoding deeply.
+      </p>
+      <div class="brain-stats">
+        <span class="b-stat"><span class="b-num">214</span> notes</span>
+        <span class="b-divider">/</span>
+        <span class="b-stat"><span class="b-num">847</span> connections</span>
+        <span class="b-divider">/</span>
+        <span class="b-stat"><span class="b-num">14</span> clusters</span>
+      </div>
+    </header>
+
+    <div class="filter-bar">
+      <p class="label" style="flex-shrink:0"><span class="slash">// </span>Filter</p>
+      <div class="tags-row">
+        <button class="filter-tag active" data-tag="all">All</button>
+        {allTags.map(tag => (
+          <button class="filter-tag" data-tag={tag}>{tag}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="notes-grid" id="notes-grid">
+      {notes.map(note => (
+        <div class="card note-card" data-tags={note.tags.join(',')}>
+          <div class="note-meta">
+            <span class="label note-id">{note.id}</span>
+            <span class="label note-date">{note.updated}</span>
+          </div>
+          <h3 class="note-title">{note.title}</h3>
+          <p class="note-excerpt">{note.excerpt}</p>
+          <div class="note-footer">
+            <div class="note-tags">
+              {note.tags.map(t => <span class="tag">{t}</span>)}
+            </div>
+            <span class="note-connections">{note.connections} links</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="add-note-cta">
+      <p class="label"><span class="slash">// </span>Want to suggest a connection or topic?</p>
+      <a href="mailto:hello@axiom.os" class="btn btn-ghost" style="margin-top:16px">Send a signal</a>
+    </div>
+
+  </div>
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-tag');
+  const cards = document.querySelectorAll('.note-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      cards.forEach(card => {
+        const tags = card.dataset.tags.split(',');
+        card.style.display = (tag === 'all' || tags.includes(tag)) ? 'flex' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-header {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+  .page-header .label { margin-bottom: 16px; }
+  .page-desc {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    margin-top: 20px;
+    font-weight: 300;
+  }
+  .brain-stats {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 32px;
+  }
+  .b-stat { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .b-num { color: var(--accent); font-weight: 700; }
+  .b-divider { color: var(--border-bright); font-family: var(--mono); }
+
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .tags-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-tag:hover { border-color: var(--border-bright); color: var(--text); }
+  .filter-tag.active { border-color: var(--accent); color: var(--accent); }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 80px;
+  }
+  .note-card {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+  }
+  .note-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .note-id { color: var(--accent); }
+  .note-date { color: var(--muted2); }
+  .note-title {
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .note-excerpt {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .note-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .note-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .note-connections {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted2);
+    white-space: nowrap;
+  }
+
+  .add-note-cta {
+    margin-bottom: 40px;
+    padding: 40px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  @media (max-width: 900px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .notes-grid { grid-template-columns: 1fr; } .filter-bar { flex-direction: column; align-items: flex-start; } }
+</style>

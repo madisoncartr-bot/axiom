@@ -1,0 +1,248 @@
+---
+import Base from '../layouts/Base.astro';
+
+const timeline = [
+  {
+    year: '2026',
+    role: 'Building in Public',
+    place: 'AXIOM.OS',
+    desc: 'Launched this site as a second brain and public learning journal. Exploring distributed systems, writing daily.',
+    current: true,
+  },
+  {
+    year: '2024',
+    role: 'Senior Software Engineer',
+    place: 'Acme Corp',
+    desc: 'Led the infrastructure migration to a distributed event-driven architecture. Cut P99 latency by 60%.',
+    current: false,
+  },
+  {
+    year: '2022',
+    role: 'Software Engineer',
+    place: 'Startup XYZ',
+    desc: 'First engineering hire. Helped scale the platform from 0 to 50k users. Built the data pipeline from scratch.',
+    current: false,
+  },
+  {
+    year: '2020',
+    role: 'Computer Science, BSc',
+    place: 'University of British Columbia',
+    desc: 'Graduated with distinction. Thesis on graph-based knowledge representation systems.',
+    current: false,
+  },
+];
+
+const projects = [
+  {
+    id: 'PRJ-001',
+    name: 'AXIOM.OS',
+    status: 'live',
+    tags: ['astro', 'typescript', 'open-source'],
+    desc: 'This site. A full personal OS: second brain, learning log, portfolio. Built with Astro and deployed on Vercel.',
+    link: '#',
+  },
+  {
+    id: 'PRJ-002',
+    name: 'EventMesh',
+    status: 'live',
+    tags: ['golang', 'kafka', 'distributed'],
+    desc: 'A lightweight event mesh for microservices. Open source, 800+ GitHub stars. Used in production by 3 companies.',
+    link: '#',
+  },
+  {
+    id: 'PRJ-003',
+    name: 'Graph Notes',
+    status: 'archived',
+    tags: ['react', 'graph-db', 'pkm'],
+    desc: 'Prototype knowledge graph explorer. Learned a lot about graph traversal and UX for complex data. Archived but instructive.',
+    link: '#',
+  },
+  {
+    id: 'PRJ-004',
+    name: 'Weekly Dispatch Bot',
+    status: 'live',
+    tags: ['python', 'llm', 'automation'],
+    desc: 'A personal bot that synthesises my week — notes, commits, reading — and drafts my learning log entry.',
+    link: '#',
+  },
+];
+---
+
+<Base title="Career Arc" description="My timeline, projects, and the work I'm proud of.">
+  <div class="container">
+
+    <header class="page-header">
+      <p class="label"><span class="slash">// </span>MOD-03</p>
+      <h1>Career <span style="color:var(--accent)">Arc</span></h1>
+      <p class="page-desc">
+        Not a résumé. A living record of the work I've done, the things I've built,
+        and where I'm headed.
+      </p>
+      <div class="header-actions">
+        <a href="/axiom-resume.pdf" class="btn btn-ghost">Download résumé ↓</a>
+        <a href="mailto:hello@axiom.os" class="btn btn-primary">Get in touch</a>
+      </div>
+    </header>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+      <p class="label" style="margin-bottom:40px"><span class="slash">// </span>Timeline</p>
+      <div class="timeline">
+        {timeline.map((item, i) => (
+          <div class={`timeline-item ${item.current ? 'current' : ''}`}>
+            <div class="timeline-left">
+              <span class="tl-year">{item.year}</span>
+              <div class="tl-line">
+                <div class="tl-dot"></div>
+                {i < timeline.length - 1 && <div class="tl-connector"></div>}
+              </div>
+            </div>
+            <div class="tl-content">
+              <div class="tl-header">
+                <h3 class="tl-role">{item.role}</h3>
+                {item.current && <span class="current-badge">Current</span>}
+              </div>
+              <p class="tl-place">{item.place}</p>
+              <p class="tl-desc">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects-section">
+      <p class="label" style="margin-bottom:40px"><span class="slash">// </span>Projects shipped</p>
+      <div class="projects-grid">
+        {projects.map(prj => (
+          <div class="card prj-card">
+            <div class="prj-header">
+              <span class="label prj-id">{prj.id}</span>
+              <span class={`status-badge status-${prj.status}`}>{prj.status}</span>
+            </div>
+            <h3 class="prj-name">{prj.name}</h3>
+            <p class="prj-desc">{prj.desc}</p>
+            <div class="prj-footer">
+              <div class="prj-tags">
+                {prj.tags.map(t => <span class="tag">{t}</span>)}
+              </div>
+              <a href={prj.link} class="prj-link">View →</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+  .page-header .label { margin-bottom: 16px; }
+  .page-desc {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 540px;
+    margin-top: 20px;
+    font-weight: 300;
+  }
+  .header-actions { display: flex; gap: 16px; margin-top: 32px; }
+
+  /* Timeline */
+  .timeline-section { margin-bottom: 80px; }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+  }
+  .timeline-left { display: flex; flex-direction: column; align-items: flex-end; padding-right: 32px; }
+  .tl-year {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 4px;
+    margin-bottom: 8px;
+  }
+  .current .tl-year { color: var(--accent); }
+  .tl-line { display: flex; flex-direction: column; align-items: center; flex: 1; }
+  .tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--muted2);
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+  .current .tl-dot { border-color: var(--accent); background: var(--accent); }
+  .tl-connector {
+    width: 1px;
+    flex: 1;
+    min-height: 40px;
+    background: var(--border);
+    margin: 4px 0;
+  }
+  .tl-content {
+    padding: 0 0 48px;
+    border-left: 1px solid var(--border);
+    padding-left: 32px;
+  }
+  .current .tl-content { border-left-color: rgba(0,255,170,0.2); }
+  .tl-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .tl-role { font-size: 18px; color: var(--text); }
+  .tl-place {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent2);
+    margin-bottom: 12px;
+  }
+  .tl-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+  .current-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    background: rgba(0,255,170,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,255,170,0.3);
+  }
+
+  /* Projects */
+  .projects-section { margin-bottom: 80px; }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .prj-card { display: flex; flex-direction: column; gap: 12px; }
+  .prj-header { display: flex; justify-content: space-between; align-items: center; }
+  .prj-id { color: var(--accent); }
+  .status-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid;
+  }
+  .status-live { color: var(--accent); border-color: rgba(0,255,170,0.3); background: rgba(0,255,170,0.05); }
+  .status-archived { color: var(--muted); border-color: var(--border); }
+  .prj-name { font-size: 18px; color: var(--text); }
+  .prj-desc { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; }
+  .prj-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+  .prj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .prj-link { font-family: var(--mono); font-size: 12px; color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 80px 1fr; }
+    .header-actions { flex-direction: column; }
+  }
+</style>

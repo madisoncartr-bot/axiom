@@ -1,0 +1,221 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Home">
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      {['Second Brain','Learning Log','Career Arc','Writing','Projects','Now Page','Knowledge Base','Mental Models','Building in Public','Second Brain','Learning Log','Career Arc','Writing','Projects','Now Page','Knowledge Base','Mental Models','Building in Public'].map(item => (
+        <span class="ticker-item"><span class="arrow">▶</span>{item}</span>
+      ))}
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <div class="status-bar">
+          <span class="status-dot"></span>
+          <span class="label" style="color: var(--accent); margin-left: 10px;">System online — v1.0.0</span>
+        </div>
+        <h1>
+          <span class="line-dim">One mind.</span><br/>
+          <span class="line-accent">One system.<br/>All of it.</span>
+        </h1>
+        <p class="hero-desc">
+          A living OS for my thinking, learning, and becoming.
+          Part second brain, part public journal — built in the open,
+          updated every week.
+        </p>
+        <div class="cta-row">
+          <a href="/brain" class="btn btn-primary">Enter the Brain</a>
+          <a href="/log" class="btn btn-ghost">Read the Log</a>
+        </div>
+      </div>
+
+      <div class="terminal-panel">
+        <div class="term-header">
+          <span class="term-dot" style="background:#ff5f57"></span>
+          <span class="term-dot" style="background:#ffbd2e"></span>
+          <span class="term-dot" style="background:#28c840"></span>
+        </div>
+        <div class="term-body">
+          <p class="tl"><span class="tk">$</span> <span class="tc">axiom</span> <span class="tv">--status</span></p>
+          <p class="tl">→ <span class="tv">modules</span>: 4 active</p>
+          <p class="tl">→ <span class="tv">notes</span>: 214 entries indexed</p>
+          <p class="tl">→ <span class="tv">learning</span>: 3 tracks in progress</p>
+          <p class="tl">→ <span class="tv">streak</span>: 22 days</p>
+          <p class="tl">&nbsp;</p>
+          <p class="tl"><span class="tk">$</span> <span class="tc">axiom</span> <span class="tv">--now</span></p>
+          <p class="tl">→ reading: <span class="tv">Thinking Fast &amp; Slow</span></p>
+          <p class="tl">→ building: <span class="tv">this OS</span></p>
+          <p class="tl">→ exploring: <span class="tv">distributed systems</span></p>
+          <p class="tl">&nbsp;</p>
+          <p class="tl"><span class="tk">$</span> <span class="tc cursor-line">█</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modules -->
+    <section class="modules-section">
+      <p class="label" style="margin-bottom: 40px;"><span class="slash">// </span>Core modules</p>
+
+      <div class="modules-grid">
+        <a href="/brain" class="card mod-card">
+          <p class="label" style="margin-bottom: 20px;">MOD-01</p>
+          <div class="mod-icon">🧠</div>
+          <h3 class="mod-name">Second Brain</h3>
+          <p class="mod-desc">A living knowledge graph. Notes, links, ideas, and mental models — all connected.</p>
+          <span class="mod-arrow">→</span>
+        </a>
+        <a href="/log" class="card mod-card">
+          <p class="label" style="margin-bottom: 20px;">MOD-02</p>
+          <div class="mod-icon">📡</div>
+          <h3 class="mod-name">Learning Log</h3>
+          <p class="mod-desc">What I'm studying, building, and breaking. Weekly dispatches from the frontier.</p>
+          <span class="mod-arrow">→</span>
+        </a>
+        <a href="/career" class="card mod-card">
+          <p class="label" style="margin-bottom: 20px;">MOD-03</p>
+          <div class="mod-icon">📈</div>
+          <h3 class="mod-name">Career Arc</h3>
+          <p class="mod-desc">Timeline, projects, and work I'm proud of. Not a résumé — a living portfolio.</p>
+          <span class="mod-arrow">→</span>
+        </a>
+        <a href="/now" class="card mod-card">
+          <p class="label" style="margin-bottom: 20px;">MOD-04</p>
+          <div class="mod-icon">⚡</div>
+          <h3 class="mod-name">Now Page</h3>
+          <p class="mod-desc">What I'm focused on right now. Updated regularly. No noise, just signal.</p>
+          <span class="mod-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <span class="stat-num">214</span>
+          <span class="label">Notes indexed</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">38</span>
+          <span class="label">Posts written</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">12</span>
+          <span class="label">Projects shipped</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">22</span>
+          <span class="label">Day streak</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 72px 0 60px;
+  }
+  .status-bar { display: flex; align-items: center; margin-bottom: 28px; }
+  .line-dim { color: var(--text); }
+  .line-accent { color: var(--accent); }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 420px;
+    margin: 24px 0 40px;
+  }
+  .cta-row { display: flex; gap: 16px; }
+
+  /* Terminal */
+  .terminal-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .term-header {
+    display: flex;
+    gap: 8px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .term-body { padding: 20px; line-height: 2.1; }
+  .tl { color: var(--muted); }
+  .tc { color: var(--accent2); }
+  .tv { color: var(--accent); }
+  .tk { color: var(--accent3); }
+  .cursor-line { animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* Modules */
+  .modules-section { padding: 60px 0; border-top: 1px solid var(--border); }
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .mod-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px;
+  }
+  .mod-card:hover { text-decoration: none; }
+  .mod-icon { font-size: 24px; margin-bottom: 16px; }
+  .mod-name { font-size: 16px; color: var(--text); margin-bottom: 10px; }
+  .mod-desc { font-size: 13px; color: var(--muted); line-height: 1.6; flex: 1; }
+  .mod-arrow { font-family: var(--mono); color: var(--accent); margin-top: 20px; font-size: 16px; }
+
+  /* Stats */
+  .stats-section { margin-bottom: 60px; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .stat-cell {
+    background: var(--surface);
+    padding: 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 32px;
+    color: var(--accent);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .terminal-panel { display: none; }
+    .modules-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .modules-grid, .stats-grid { grid-template-columns: 1fr; }
+    .cta-row { flex-direction: column; }
+  }
+</style>

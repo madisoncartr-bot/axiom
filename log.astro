@@ -1,0 +1,240 @@
+---
+import Base from '../layouts/Base.astro';
+
+const posts = [
+  {
+    num: '038',
+    date: '2026-03-31',
+    title: 'How distributed consensus actually works',
+    tags: ['tech', 'deep-dive'],
+    excerpt: 'I spent a week reading about Raft and Paxos. Here is what clicked, what did not, and why this stuff matters beyond databases.',
+    readTime: '8 min',
+  },
+  {
+    num: '037',
+    date: '2026-03-24',
+    title: 'On building a second brain that does not rot',
+    tags: ['meta', 'pkm'],
+    excerpt: 'Most knowledge systems die within months. I think I know why — and what the fix is. Spoiler: it is not a better app.',
+    readTime: '6 min',
+  },
+  {
+    num: '036',
+    date: '2026-03-17',
+    title: 'Three months learning TypeScript seriously',
+    tags: ['tech', 'learning'],
+    excerpt: 'What changed after I stopped treating TypeScript like annotated JavaScript and started treating it like a proof system.',
+    readTime: '5 min',
+  },
+  {
+    num: '035',
+    date: '2026-03-10',
+    title: 'The compounding effect: year one in review',
+    tags: ['growth', 'reflection'],
+    excerpt: 'One year of daily learning logs. Here is what the data shows, what surprised me, and what I am doubling down on.',
+    readTime: '10 min',
+  },
+  {
+    num: '034',
+    date: '2026-03-03',
+    title: 'What Thinking Fast and Slow taught me about my own bugs',
+    tags: ['books', 'psychology'],
+    excerpt: 'System 1 runs the show. System 2 thinks it does. Notes from a slow, deliberate read of Kahneman\'s masterwork.',
+    readTime: '7 min',
+  },
+];
+
+const tracks = [
+  { name: 'Distributed Systems', progress: 62, color: 'var(--accent)' },
+  { name: 'TypeScript Mastery', progress: 80, color: 'var(--accent2)' },
+  { name: 'Writing Practice', progress: 45, color: 'var(--accent3)' },
+];
+---
+
+<Base title="Learning Log" description="Weekly dispatches on what I'm learning, building, and figuring out.">
+  <div class="container">
+
+    <header class="page-header">
+      <p class="label"><span class="slash">// </span>MOD-02</p>
+      <h1>Learning <span style="color:var(--accent)">Log</span></h1>
+      <p class="page-desc">
+        Weekly dispatches from the frontier. What I'm studying, what surprised me,
+        and what I'm building next. Public accountability, compounded.
+      </p>
+    </header>
+
+    <div class="log-layout">
+      <div class="posts-col">
+        <p class="label" style="margin-bottom:28px"><span class="slash">// </span>All entries</p>
+        <div class="posts-list">
+          {posts.map(post => (
+            <article class="card post-card">
+              <div class="post-meta">
+                <span class="post-num">#{post.num}</span>
+                <span class="post-date">{post.date}</span>
+                <span class="post-read">{post.readTime} read</span>
+              </div>
+              <h2 class="post-title">{post.title}</h2>
+              <p class="post-excerpt">{post.excerpt}</p>
+              <div class="post-footer">
+                <div class="post-tags">
+                  {post.tags.map(t => <span class="tag">{t}</span>)}
+                </div>
+                <a href="#" class="post-link">Read →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <p class="label" style="margin-bottom:20px"><span class="slash">// </span>Active tracks</p>
+          <div class="tracks">
+            {tracks.map(track => (
+              <div class="track">
+                <div class="track-header">
+                  <span class="track-name">{track.name}</span>
+                  <span class="track-pct" style={`color:${track.color}`}>{track.progress}%</span>
+                </div>
+                <div class="track-bar">
+                  <div class="track-fill" style={`width:${track.progress}%; background:${track.color}`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <p class="label" style="margin-bottom:20px"><span class="slash">// </span>Currently reading</p>
+          <div class="reading-stack">
+            <div class="reading-item">
+              <span class="reading-dot" style="background:var(--accent)"></span>
+              <div>
+                <p class="reading-title">Thinking Fast and Slow</p>
+                <p class="reading-author">Daniel Kahneman</p>
+              </div>
+            </div>
+            <div class="reading-item">
+              <span class="reading-dot" style="background:var(--accent2)"></span>
+              <div>
+                <p class="reading-title">Designing Data-Intensive Applications</p>
+                <p class="reading-author">Martin Kleppmann</p>
+              </div>
+            </div>
+            <div class="reading-item">
+              <span class="reading-dot" style="background:var(--muted2)"></span>
+              <div>
+                <p class="reading-title">The Art of Doing Science</p>
+                <p class="reading-author">Richard Hamming</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section subscribe-box">
+          <p class="label" style="margin-bottom:12px"><span class="slash">// </span>Get the weekly log</p>
+          <p class="sub-desc">New entry every Monday. No spam, just signal.</p>
+          <input type="email" placeholder="your@email.com" class="sub-input" />
+          <button class="btn btn-primary" style="width:100%;margin-top:10px">Subscribe</button>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .page-header .label { margin-bottom: 16px; }
+  .page-desc {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 540px;
+    margin-top: 20px;
+    font-weight: 300;
+  }
+
+  .log-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 60px;
+    margin-bottom: 80px;
+  }
+
+  /* Posts */
+  .posts-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .post-card { display: flex; flex-direction: column; gap: 12px; background: var(--bg); }
+  .post-meta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .post-num { color: var(--accent); font-weight: 700; }
+  .post-date, .post-read { color: var(--muted); }
+  .post-title {
+    font-size: 18px;
+    font-family: var(--mono);
+    color: var(--text);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .post-excerpt { font-size: 14px; color: var(--muted); line-height: 1.65; }
+  .post-footer { display: flex; justify-content: space-between; align-items: center; }
+  .post-tags { display: flex; gap: 6px; }
+  .post-link { font-family: var(--mono); font-size: 12px; color: var(--accent); text-decoration: none; }
+  .post-link:hover { text-decoration: underline; }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 32px; }
+  .sidebar-section {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 24px;
+  }
+
+  /* Tracks */
+  .tracks { display: flex; flex-direction: column; gap: 20px; }
+  .track-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .track-name { font-family: var(--mono); font-size: 12px; color: var(--text); }
+  .track-pct { font-family: var(--mono); font-size: 12px; font-weight: 700; }
+  .track-bar {
+    height: 3px;
+    background: var(--border);
+    width: 100%;
+  }
+  .track-fill { height: 100%; transition: width 0.6s ease; }
+
+  /* Reading */
+  .reading-stack { display: flex; flex-direction: column; gap: 16px; }
+  .reading-item { display: flex; gap: 12px; align-items: flex-start; }
+  .reading-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .reading-title { font-size: 13px; color: var(--text); font-weight: 500; line-height: 1.4; }
+  .reading-author { font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 2px; }
+
+  /* Subscribe */
+  .sub-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .sub-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 10px 14px;
+    outline: none;
+  }
+  .sub-input:focus { border-color: var(--border-bright); }
+  .sub-input::placeholder { color: var(--muted2); }
+
+  @media (max-width: 900px) {
+    .log-layout { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+  }
+</style>
